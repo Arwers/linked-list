@@ -28,4 +28,14 @@ int isEmpty( ListItem* pList ); // pList - the List
 
 // clears list, so list is empty and ready to father use
 // uses user releasing memory function to free the user info
-void clearList( ListItem* pList );
+void clearList( ListItem* pList, void( __cdecl* freeMem )( const void* ) );
+
+// clears list and removes quard and sets the list to the NULL ptr
+void removeList( ListItem** pAdr, void( __cdecl* freeMem )( const void* ) );
+
+// sorts the list elems using the user comparing function (compares user info)
+void sortList( ListItem* pList, int( __cdecl* compareInfo )( const void*, const void* ) );
+
+// finds and returns ptr to element containing the same info as in the second param
+// and returns by parameter pPrev the pointer to the previous elem at the list
+ListItem* find( ListItem* pList, const void* pInfo, ListItem** pPrev, int( __cdecl* compareInfo )( const void*, const void* ) );

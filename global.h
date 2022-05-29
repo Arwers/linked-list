@@ -10,5 +10,7 @@ typedef struct listInfo {
 } listInfo;
 
 #define LISTINFO listInfo
+void freeInfo( const void* );
+int compare( const void*, const void* );
 
 #endif
