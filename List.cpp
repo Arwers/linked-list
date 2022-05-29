@@ -1,5 +1,4 @@
 #include <iostream>
-#include "global.h"
 #include "List.h"
 
 ListItem* createList() {
@@ -14,6 +13,8 @@ ListItem* createList() {
 	
 	return pElem; 
 }
+
+
 
 int insertFront( ListItem* pList, LISTINFO* pInfo ) {
 	return insert( pList, pInfo );
@@ -59,7 +60,7 @@ int isEmpty( ListItem* pList ) {
 }
 
 void clearList( ListItem* pList, void( __cdecl* freeMem )( const void* ) ) {
-	if ( !isEmpty ) {
+	if ( !isEmpty(pList) ) {
 		freeMem( remove( pList ) );
 	}
 }
@@ -70,7 +71,7 @@ void removeList( ListItem** pAdr, void( __cdecl* freeMem )( const void* ) ) {
 	*pAdr = NULL; // set pointer to NULL
 }
 
-void sortList( ListItem* pList, int( __cdecl* compareInfo )( const void*, const void* ) ) {
+void sortList( ListItem* pList, int( __cdecl* cmpItem )( const void*, const void* ) ) {
 	if ( isEmpty( pList ) ) {
 		return;
 	}
@@ -99,7 +100,7 @@ void sortList( ListItem* pList, int( __cdecl* compareInfo )( const void*, const 
 	}
 }
 
-ListItem* find( ListItem* pList, const void* pInfo, ListItem** pPrev, int( __cdecl* compareInfo )( const void*, const void* ) ) {
+ListItem* find( ListItem* pList, const void* pInfo, ListItem** pPrev, int( __cdecl* cmpItem )( const void*, const void* ) ) {
 	if ( ( isEmpty( pList ) ) ) {
 		printf( "LINKED LIST IS EMPTY - find()" );
 		return NULL;
@@ -107,7 +108,7 @@ ListItem* find( ListItem* pList, const void* pInfo, ListItem** pPrev, int( __cde
 
 	ListItem* pTemp = pList;
 	while ( !isEmpty( pTemp ) ) {
-		if ( compareInfo( ( const void* )( pTemp->pNext->pInfo ), pInfo ) == 0 ) {
+		if ( cmpItem( ( const void* )( pTemp->pNext->pInfo ), pInfo ) == 0 ) {
 			*pPrev = pTemp;
 			return pTemp->pNext;
 		}
