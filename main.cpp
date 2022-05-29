@@ -22,10 +22,12 @@ int main() {
 		listInfo* pInfo = createInf();
 		pInfo->nKey = rand() % 50;
 		pInfo->p[ 0 ] = i + 1;
+		
 		if ( i == 11 ) {
 			// for 9th element key should be 2000 (task requirement)
 			pInfo->nKey = 2000;
 		}
+
 		if ( !insertFront( pList, pInfo ) ) {
 			printf( "ERROR - 20 random elements segment" );
 			return 0;
@@ -82,13 +84,13 @@ int main() {
 	pElem1->nKey = 5318008;
 	pElem1->p[ 0 ] = 1;
 	pElem1->p[ 1 ] = 1;
-	insertFront( pList, pElem1 );
+	insert( pList, pElem1 );
 	
 	listInfo* pElem2 = createInf();
 	pElem2->nKey = 71830;
 	pElem2->p[ 0 ] = 2;
 	pElem2->p[ 1 ] = 1;
-	insertFront( pList, pElem2 );
+	insert( pList, pElem2 );
 
 #ifdef DEBUG
 	printf( "LINKED LIST CLEARED + 2 NEW ELEMENTS: \n" );
@@ -97,6 +99,7 @@ int main() {
 
 	// delete list ( task requirement)
 	removeList( &pList, freeInfo );
+
 }
 
 void printList( ListItem* pList ) {
@@ -112,14 +115,14 @@ listInfo* createInf() {
 	listInfo* pTemp = ( listInfo* )malloc( sizeof( listInfo ) );
 
 	if ( !pTemp ) {
-		printf( "ERROR - CreateInf() 1" );
+		printf( "ERROR - CreateInf() - 1" );
 		return NULL;
 	}
 
 	pTemp->p = ( int* )malloc( 2 * sizeof( int ) );
 
 	if ( !( pTemp->p ) ) {
-		printf( "ERROR - CreateInf() 2" );
+		printf( "ERROR - CreateInf() - 2" );
 		return NULL;
 	}
 

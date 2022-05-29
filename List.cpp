@@ -7,14 +7,11 @@ ListItem* createList() {
 		printf( "ERROR - createList()" );
 		return 0;
 	}
-	
 	pElem->pInfo = NULL;
 	pElem->pNext = NULL;
 	
 	return pElem; 
 }
-
-
 
 int insertFront( ListItem* pList, LISTINFO* pInfo ) {
 	return insert( pList, pInfo );
@@ -48,9 +45,9 @@ LISTINFO* remove( ListItem* pAfter ) {
 	// [HEAD]-->[a]-->[b]-->[c]-->null
 	// remove element [b] + [a]-->[c] + return userInfo
 	ListItem* pTemp = pAfter->pNext;
-	LISTINFO* userInfo = pTemp->pInfo;
+	listInfo* userInfo = pTemp->pInfo;
 	pAfter->pNext = pTemp->pNext;
-	free( pAfter->pNext );
+	free( pTemp );
 	return userInfo;
 
 }
@@ -60,7 +57,7 @@ int isEmpty( ListItem* pList ) {
 }
 
 void clearList( ListItem* pList, void( __cdecl* freeMem )( const void* ) ) {
-	if ( !isEmpty(pList) ) {
+	while( !isEmpty( pList ) ) {
 		freeMem( remove( pList ) );
 	}
 }
